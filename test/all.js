@@ -20,8 +20,9 @@ testLoad(path.join(__dirname, 'fixtures/default.txt'), function(data){
 				actual = md.render(fixture.first.text);
 
 			t.equals(actual, expected);
-
 		});
 
 	});
 });
+
+require('./xss')
