@@ -1,8 +1,6 @@
-tape = require('tape'),
-mdk = require('../index');
-
-var md = require('markdown-it')()
-.use(mdk);
+var tape = require('tape');
+var mdk = require('../index');
+var md = require('markdown-it')().use(mdk);
 
 tape('shall not be prone to XSS', function(t){
   t.plan(1);

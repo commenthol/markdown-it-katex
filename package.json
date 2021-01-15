@@ -18,6 +18,8 @@
   "author": "waylonflinn@gmail.com",
   "main": "index.js",
   "scripts": {
+    "all": "npm run lint && npm t",
+    "lint": "eslint --fix \"**/*.js\"",
     "test": "node test/all.js",
     "watch": "watchify browser.js -o bundle.js -v"
   },
@@ -25,6 +27,7 @@
     "katex": "^0.12.0"
   },
   "devDependencies": {
+    "eslint": "^7.17.0",
     "markdown-it": "^12.0.4",
     "markdown-it-testgen": "^0.1.6",
     "tape": "^5.1.1",

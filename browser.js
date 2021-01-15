@@ -7,7 +7,7 @@ var input = document.getElementById('input'),
 	output = document.getElementById('output'),
 	button = document.getElementById('button');
 
-button.addEventListener('click', function(ev){
+button.addEventListener('click', function(/*ev*/){
 
 	var result = md.render(input.value);
 
