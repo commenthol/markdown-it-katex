@@ -1,19 +1,17 @@
-var md = require('markdown-it')(),
-	mk = require('./index');
+const md = require('markdown-it')()
+const mk = require('./index')
 
-md.use(mk);
+md.use(mk)
 
-var input = document.getElementById('input'),
-	output = document.getElementById('output'),
-	button = document.getElementById('button');
+const input = document.getElementById('input')
+const output = document.getElementById('output')
+const button = document.getElementById('button')
 
-button.addEventListener('click', function(/*ev*/){
+button.addEventListener('click', function (/* ev */) {
+  const result = md.render(input.value)
 
-	var result = md.render(input.value);
-
-	output.innerHTML = result;
-
-});
+  output.innerHTML = result
+})
 
 /*
 
@@ -29,8 +27,6 @@ $\nabla \times \vec{\mathbf{B}} -\, \frac1c\, \frac{\partial\vec{\mathbf{E}}}{\p
 $\nabla \times \vec{\mathbf{E}}\, +\, \frac1c\, \frac{\partial\vec{\mathbf{B}}}{\partial t}  = \vec{\mathbf{0}}$ (curl of $\vec{\mathbf{E}}$ is proportional to the time derivative of $\vec{\mathbf{B}}$)
 
 $\nabla \cdot \vec{\mathbf{B}}  = 0$
-
-
 
 \sqrt{3x-1}+(1+x)^2
 
@@ -57,7 +53,6 @@ Same thing in a LaTeX array
 
 \end{array}
 
-
 \begin{array}{c}
 y_1 \\
 y_2 \mathtt{t}_i \\
@@ -69,10 +64,7 @@ x' &=& &x \sin\phi &+& z \cos\phi \\
 z' &=& - &x \cos\phi &+& z \sin\phi \\
 \end{array}
 
-
-
 # Maxwell's Equations
-
 
 equation | description
 ----------|------------
