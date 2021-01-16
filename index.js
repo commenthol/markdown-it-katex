@@ -7,7 +7,6 @@ It differs in that it takes (a subset of) LaTeX as input and relies on KaTeX
 for rendering output.
 */
 
-/* jslint node: true */
 'use strict'
 
 const katex = require('katex')
@@ -24,11 +23,11 @@ function isValidDelim (state, pos) {
 
   // Check non-whitespace conditions for opening and closing, and
   // check that closing delimeter isn't followed by a number
-  if (prevChar === 0x20/* " " */ || prevChar === 0x09/* \t */ ||
-            (nextChar >= 0x30/* "0" */ && nextChar <= 0x39/* "9" */)) {
+  if (prevChar === 0x20 /* " " */ || prevChar === 0x09 /* \t */ ||
+    (nextChar >= 0x30 /* "0" */ && nextChar <= 0x39 /* "9" */)) {
     can_close = false
   }
-  if (nextChar === 0x20/* " " */ || nextChar === 0x09/* \t */) {
+  if (nextChar === 0x20 /* " " */ || nextChar === 0x09 /* \t */) {
     can_open = false
   }
 
@@ -44,11 +43,15 @@ function math_inline (state, silent) {
   let pos
   let token
 
-  if (state.src[state.pos] !== '$') { return false }
+  if (state.src[state.pos] !== '$') {
+    return false
+  }
 
   res = isValidDelim(state, state.pos)
   if (!res.can_open) {
-    if (!silent) { state.pending += '$' }
+    if (!silent) {
+      state.pending += '$'
+    }
     state.pos += 1
     return true
   }
@@ -63,23 +66,31 @@ function math_inline (state, silent) {
     // Found potential $, look for escapes, pos will point to
     // first non escape when complete
     pos = match - 1
-    while (state.src[pos] === '\\') { pos -= 1 }
+    while (state.src[pos] === '\\') {
+      pos -= 1
+    }
 
     // Even number of escapes, potential closing delimiter found
-    if (((match - pos) % 2) === 1) { break }
+    if (((match - pos) % 2) === 1) {
+      break
+    }
     match += 1
   }
 
   // No closing delimter found.  Consume $ and continue.
   if (match === -1) {
-    if (!silent) { state.pending += '$' }
+    if (!silent) {
+      state.pending += '$'
+    }
     state.pos = start
     return true
   }
 
   // Check if we have empty content, ie: $$.  Do not parse.
   if (match - start === 0) {
-    if (!silent) { state.pending += '$$' }
+    if (!silent) {
+      state.pending += '$$'
+    }
     state.pos = start + 1
     return true
   }
@@ -87,7 +98,9 @@ function math_inline (state, silent) {
   // Check for valid closing delimiter
   res = isValidDelim(state, match)
   if (!res.can_close) {
-    if (!silent) { state.pending += '$' }
+    if (!silent) {
+      state.pending += '$'
+    }
     state.pos = start
     return true
   }
@@ -111,13 +124,19 @@ function math_block (state, start, end, silent) {
   let pos = state.bMarks[start] + state.tShift[start]
   let max = state.eMarks[start]
 
-  if (pos + 2 > max) { return false }
-  if (state.src.slice(pos, pos + 2) !== '$$') { return false }
+  if (pos + 2 > max) {
+    return false
+  }
+  if (state.src.slice(pos, pos + 2) !== '$$') {
+    return false
+  }
 
   pos += 2
   firstLine = state.src.slice(pos, max)
 
-  if (silent) { return true }
+  if (silent) {
+    return true
+  }
   if (firstLine.trim().slice(-2) === '$$') {
     // Single line expression
     firstLine = firstLine.trim().slice(0, -2)
@@ -127,7 +146,9 @@ function math_block (state, start, end, silent) {
   for (next = start; !found;) {
     next++
 
-    if (next >= end) { break }
+    if (next >= end) {
+      break
+    }
 
     pos = state.bMarks[next] + state.tShift[next]
     max = state.eMarks[next]
@@ -156,9 +177,16 @@ function math_block (state, start, end, silent) {
   return true
 }
 
-function cleanString (html) {
-  html = html.replace(/[^\w\s]/gi, '')
-  return html
+function escapeHtml (html) {
+  return (html || '')
+    .replace(/&amp;/g, '&')
+    .replace(/[&<>'"]/g, tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag]))
 }
 
 module.exports = function math_plugin (md, options) {
@@ -172,8 +200,10 @@ module.exports = function math_plugin (md, options) {
     try {
       return katex.renderToString(latex, options)
     } catch (error) {
-      if (options.throwOnError) { console.log(error) }
-      return cleanString(latex)
+      if (options.throwOnError) {
+        console.log(error)
+      }
+      return escapeHtml(latex)
     }
   }
 
@@ -186,8 +216,10 @@ module.exports = function math_plugin (md, options) {
     try {
       return '<p>' + katex.renderToString(latex, options) + '</p>'
     } catch (error) {
-      if (options.throwOnError) { console.log(error) }
-      return cleanString(latex)
+      if (options.throwOnError) {
+        console.log(error)
+      }
+      return escapeHtml(latex)
     }
   }
 

@@ -14,7 +14,7 @@ tape('shall not be prone to XSS', function (t) {
 tape('shall not be prone to XSS 2', function (t) {
   t.plan(1)
 
-  const expected = '<p>unicodeimg srcx onerroralert1</p>\n'
+  const expected = '<p>\\unicode{&lt;img src=x onerror=alert(1)&gt;}</p>\n'
   const actual = md.render('$\\unicode{<img src=x onerror=alert(1)>}$')
 
   t.equals(actual, expected)
