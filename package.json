@@ -24,17 +24,17 @@
     "watch": "watchify browser.js -o bundle.js -v"
   },
   "dependencies": {
-    "katex": "^0.12.0"
+    "katex": "^0.13.11"
   },
   "devDependencies": {
-    "eslint": "^7.18.0",
+    "eslint": "^7.26.0",
     "eslint-config-standard": "^16.0.2",
-    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-import": "^2.23.1",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "markdown-it": "^12.0.4",
+    "eslint-plugin-promise": "^4.3.1",
+    "markdown-it": "^12.0.6",
     "markdown-it-testgen": "^0.1.6",
-    "tape": "^5.1.1",
+    "tape": "^5.2.2",
     "watchify": "^3.11.1"
   },
   "publishConfig": {
