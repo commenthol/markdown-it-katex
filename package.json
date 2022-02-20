@@ -10,15 +10,17 @@
     "markdown-it-plugin",
     "markdown-it"
   ],
+  "homepage": "https://github.com/commenthol/markdown-it-katex#readme",
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:waylonflinn/markdown-it-katex.git"
+    "url": "git+ssh://git@github.com:commenthol/markdown-it-katex.git"
   },
   "license": "MIT",
   "author": "waylonflinn@gmail.com",
   "main": "index.js",
   "scripts": {
     "all": "npm run lint && npm t",
+    "ci": "npm run all",
     "lint": "eslint --ext .js .",
     "test": "mocha",
     "watch": "watchify browser.js -o bundle.js -v"
