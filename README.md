@@ -2,7 +2,7 @@
 
 Add Math to your Markdown
 
-[![npm version](https://img.shields.io/npm/v/@commenthol/markdown-it-katex)](https://www.npmjs.com/package/markdown-it-katex@caldate/)
+[![npm version](https://img.shields.io/npm/v/@commenthol/markdown-it-katex)](https://www.npmjs.com/package/@commenthol/markdown-it-katex)
 [![Build Status](https://github.com/commenthol/markdown-it-katex/workflows/CI/badge.svg?branch=master&event=push)](https://github.com/commenthol/markdown-it-katex/actions/workflows/ci.yml?query=branch%3Amaster)
 
 
