@@ -1,7 +1,0 @@
-test
-*.log
-*.tgz
-.*
-bundle.js
-browser.js
-index.html

@@ -25,6 +25,9 @@
     "test": "mocha",
     "watch": "watchify browser.js -o bundle.js -v"
   },
+  "files": [
+    "index.js"
+  ],
   "dependencies": {
     "katex": "^0.16.9"
   },
