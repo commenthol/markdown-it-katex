@@ -32,8 +32,8 @@ function isValidDelim (state, pos) {
   }
 
   return {
-    can_open: can_open,
-    can_close: can_close
+    can_open,
+    can_close
   }
 }
 
